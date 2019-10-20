@@ -9,7 +9,7 @@ namespace CoreCodedChatbot.ApiClient
 {
     public static class Package
     {
-        public static ServiceCollection AddApiClientServices(this ServiceCollection services)
+        public static IServiceCollection AddApiClientServices(this IServiceCollection services)
         {
             services.AddTransient<IGuessingGameApiClient, GuessingGameApiClient>();
             services.AddTransient<IPlaylistApiClient, PlaylistApiClient>();
