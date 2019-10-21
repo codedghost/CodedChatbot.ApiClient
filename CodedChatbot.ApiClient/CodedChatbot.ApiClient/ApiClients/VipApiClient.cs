@@ -13,16 +13,14 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
     {
         private HttpClient _client;
 
-        public VipApiClient(IConfigService configService)
+        public VipApiClient(IConfigService configService, ISecretService secretService)
         {
-            var config = configService.GetConfig();
-
             _client = new HttpClient
             {
-                BaseAddress = new Uri(config.VipApiUrl),
+                BaseAddress = new Uri(secretService.GetSecret<string>("VipApiUrl")),
                 DefaultRequestHeaders =
                 {
-                    Authorization = new AuthenticationHeaderValue("Bearer", config.JwtTokenString)
+                    Authorization = new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
                 }
             };
         }
