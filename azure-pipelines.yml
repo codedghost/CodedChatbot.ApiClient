@@ -6,10 +6,7 @@
 trigger:
 - master
 
-pr:
-  branches:
-    exclude:
-    - master
+pr: none
 
 pool:
   vmImage: 'ubuntu-latest'
