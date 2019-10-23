@@ -3,9 +3,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
+using CoreCodedChatbot.Config;
 using CoreCodedChatbot.Library.Helpers;
 using CoreCodedChatbot.Library.Interfaces.Services;
 using CoreCodedChatbot.Library.Models.ApiRequest.Vip;
+using CoreCodedChatbot.Secrets;
 
 namespace CoreCodedChatbot.ApiClient.ApiClients
 {
