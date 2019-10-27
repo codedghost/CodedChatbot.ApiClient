@@ -19,7 +19,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
         {
             _client = new HttpClient
             {
-                BaseAddress = new Uri(secretService.GetSecret<string>("VipApiUrl")),
+                BaseAddress = new Uri(configService.Get<string>("VipApiUrl")),
                 DefaultRequestHeaders =
                 {
                     Authorization = new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
