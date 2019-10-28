@@ -3,9 +3,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
+using CoreCodedChatbot.Config;
 using CoreCodedChatbot.Library.Helpers;
 using CoreCodedChatbot.Library.Interfaces.Services;
 using CoreCodedChatbot.Library.Models.ApiRequest.Vip;
+using CoreCodedChatbot.Secrets;
 
 namespace CoreCodedChatbot.ApiClient.ApiClients
 {
@@ -13,16 +15,14 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
     {
         private HttpClient _client;
 
-        public VipApiClient(IConfigService configService)
+        public VipApiClient(IConfigService configService, ISecretService secretService)
         {
-            var config = configService.GetConfig();
-
             _client = new HttpClient
             {
-                BaseAddress = new Uri(config.VipApiUrl),
+                BaseAddress = new Uri(configService.Get<string>("VipApiUrl")),
                 DefaultRequestHeaders =
                 {
-                    Authorization = new AuthenticationHeaderValue("Bearer", config.JwtTokenString)
+                    Authorization = new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
                 }
             };
         }

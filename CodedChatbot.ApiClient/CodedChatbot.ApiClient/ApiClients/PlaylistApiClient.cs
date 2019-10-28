@@ -3,11 +3,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
+using CoreCodedChatbot.Config;
 using CoreCodedChatbot.Library.Helpers;
 using CoreCodedChatbot.Library.Interfaces.Services;
 using CoreCodedChatbot.Library.Models.ApiRequest.Playlist;
 using CoreCodedChatbot.Library.Models.ApiResponse.Playlist;
 using CoreCodedChatbot.Library.Models.Enums;
+using CoreCodedChatbot.Secrets;
 using Newtonsoft.Json;
 
 namespace CoreCodedChatbot.ApiClient.ApiClients
@@ -16,15 +18,14 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
     {
         private HttpClient _playlistClient;
 
-        public PlaylistApiClient(IConfigService configService)
+        public PlaylistApiClient(IConfigService configService, ISecretService secretService)
         {
-            var config = configService.GetConfig();
             _playlistClient = new HttpClient
             {
-                BaseAddress = new Uri(config.PlaylistApiUrl),
+                BaseAddress = new Uri(configService.Get<string>("PlaylistApiUrl")),
                 DefaultRequestHeaders =
                 {
-                    Authorization = new AuthenticationHeaderValue("Bearer", config.JwtTokenString)
+                    Authorization = new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
                 }
             };
         }

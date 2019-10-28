@@ -3,9 +3,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
+using CoreCodedChatbot.Config;
 using CoreCodedChatbot.Library.Helpers;
 using CoreCodedChatbot.Library.Interfaces.Services;
 using CoreCodedChatbot.Library.Models.ApiRequest.GuessingGame;
+using CoreCodedChatbot.Secrets;
 using Newtonsoft.Json;
 
 namespace CoreCodedChatbot.ApiClient.ApiClients
@@ -14,15 +16,14 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
     {
         private HttpClient _guessingGameClient;
 
-        public GuessingGameApiClient(IConfigService configService)
+        public GuessingGameApiClient(IConfigService configService, ISecretService secretService)
         {
-            var config = configService.GetConfig();
             _guessingGameClient = new HttpClient
             {
-                BaseAddress = new Uri(config.GuessingGameApiUrl),
+                BaseAddress = new Uri(configService.Get<string>("GuessingGameApiUrl")),
                 DefaultRequestHeaders =
                 {
-                    Authorization = new AuthenticationHeaderValue("Bearer", config.JwtTokenString)
+                    Authorization = new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
                 }
             };
         }
