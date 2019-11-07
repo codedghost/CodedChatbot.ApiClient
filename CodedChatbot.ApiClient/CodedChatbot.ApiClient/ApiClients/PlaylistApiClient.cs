@@ -2,13 +2,12 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using CoreCodedChatbot.ApiClient.DataHelper;
 using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
+using CoreCodedChatbot.ApiContract.Enums.Playlist;
+using CoreCodedChatbot.ApiContract.RequestModels.Playlist;
+using CoreCodedChatbot.ApiContract.ResponseModels.Playlist;
 using CoreCodedChatbot.Config;
-using CoreCodedChatbot.Library.Helpers;
-using CoreCodedChatbot.Library.Interfaces.Services;
-using CoreCodedChatbot.Library.Models.ApiRequest.Playlist;
-using CoreCodedChatbot.Library.Models.ApiResponse.Playlist;
-using CoreCodedChatbot.Library.Models.Enums;
 using CoreCodedChatbot.Secrets;
 using Newtonsoft.Json;
 

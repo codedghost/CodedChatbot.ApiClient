@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CoreCodedChatbot.Library" Version="1.0.308" />
+    <PackageReference Include="CoreCodedChatbot.ApiContract" Version="1.0.322" />
+    <PackageReference Include="CoreCodedChatbot.Config" Version="1.0.296" />
+    <PackageReference Include="CoreCodedChatbot.Secrets" Version="1.0.317" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 
 </Project>

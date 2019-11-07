@@ -2,13 +2,11 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using CoreCodedChatbot.ApiClient.DataHelper;
 using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
+using CoreCodedChatbot.ApiContract.RequestModels.StreamStatus;
+using CoreCodedChatbot.ApiContract.ResponseModels.StreamStatus;
 using CoreCodedChatbot.Config;
-using CoreCodedChatbot.Library.Helpers;
-using CoreCodedChatbot.Library.Interfaces.Services;
-using CoreCodedChatbot.Library.Models.ApiRequest.StreamStatus;
-using CoreCodedChatbot.Library.Models.ApiResponse.StreamStatus;
-using CoreCodedChatbot.Library.Models.Data;
 using CoreCodedChatbot.Secrets;
 using Newtonsoft.Json;
 
