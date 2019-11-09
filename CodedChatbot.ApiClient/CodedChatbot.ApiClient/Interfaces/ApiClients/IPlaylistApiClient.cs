@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using CoreCodedChatbot.Library.Models.ApiRequest.Playlist;
-using CoreCodedChatbot.Library.Models.ApiResponse.Playlist;
-using CoreCodedChatbot.Library.Models.Enums;
+using CoreCodedChatbot.ApiContract.Enums.Playlist;
+using CoreCodedChatbot.ApiContract.RequestModels.Playlist;
+using CoreCodedChatbot.ApiContract.ResponseModels.Playlist;
 
 namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
 {

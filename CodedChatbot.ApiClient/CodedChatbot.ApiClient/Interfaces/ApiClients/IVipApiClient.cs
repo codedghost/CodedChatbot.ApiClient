@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using CoreCodedChatbot.Library.Models.ApiRequest.Vip;
+using CoreCodedChatbot.ApiContract.RequestModels.Vip;
 
 namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
 {
     public interface IVipApiClient
     {
-        Task<bool> GiftVip(GiftVipModel giftVipModel);
-        Task<bool> ModGiveVip(ModGiveVipModel modGiveVipModel);
+        Task<bool> GiftVip(GiftVipRequest giftVipModel);
+        Task<bool> ModGiveVip(ModGiveVipRequest modGiveVipModel);
     }
 }

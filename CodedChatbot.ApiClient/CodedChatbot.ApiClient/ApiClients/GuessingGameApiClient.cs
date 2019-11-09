@@ -2,10 +2,10 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using CoreCodedChatbot.ApiClient.DataHelper;
 using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
+using CoreCodedChatbot.ApiContract.RequestModels.GuessingGame;
 using CoreCodedChatbot.Config;
-using CoreCodedChatbot.Library.Helpers;
-using CoreCodedChatbot.Library.Models.ApiRequest.GuessingGame;
 using CoreCodedChatbot.Secrets;
 using Newtonsoft.Json;
 
@@ -27,7 +27,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             };
         }
 
-        public async Task<bool> StartGuessingGame(StartGuessingGameModel songInfo)
+        public async Task<bool> StartGuessingGame(StartGuessingGameRequest songInfo)
         {
             var result = await _guessingGameClient.PostAsync("StartGuessingGame",
                 HttpClientHelper.GetJsonData(songInfo));
@@ -43,7 +43,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             return result.IsSuccessStatusCode;
         }
 
-        public async Task<bool> SubmitGuess(SubmitGuessModel submitGuessModel)
+        public async Task<bool> SubmitGuess(SubmitGuessRequest submitGuessModel)
         {
             var result = await _guessingGameClient.PostAsync("SubmitGuess",
                 HttpClientHelper.GetJsonData(submitGuessModel));

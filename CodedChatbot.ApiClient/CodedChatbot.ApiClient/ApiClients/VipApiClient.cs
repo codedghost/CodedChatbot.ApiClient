@@ -2,11 +2,10 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using CoreCodedChatbot.ApiClient.DataHelper;
 using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
+using CoreCodedChatbot.ApiContract.RequestModels.Vip;
 using CoreCodedChatbot.Config;
-using CoreCodedChatbot.Library.Helpers;
-using CoreCodedChatbot.Library.Interfaces.Services;
-using CoreCodedChatbot.Library.Models.ApiRequest.Vip;
 using CoreCodedChatbot.Secrets;
 
 namespace CoreCodedChatbot.ApiClient.ApiClients
@@ -27,7 +26,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             };
         }
 
-        public async Task<bool> GiftVip(GiftVipModel giftVipModel)
+        public async Task<bool> GiftVip(GiftVipRequest giftVipModel)
         {
             var result =  await _client.PostAsync("GiftVip",
                    HttpClientHelper.GetJsonData(giftVipModel));
@@ -35,7 +34,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             return result.IsSuccessStatusCode;
         }
 
-        public async Task<bool> ModGiveVip(ModGiveVipModel modGiveVipModel)
+        public async Task<bool> ModGiveVip(ModGiveVipRequest modGiveVipModel)
         {
             var result = await _client.PostAsync("ModGiveVip", HttpClientHelper.GetJsonData(modGiveVipModel));
 

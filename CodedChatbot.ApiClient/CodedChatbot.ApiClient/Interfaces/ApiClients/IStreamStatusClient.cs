@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using CoreCodedChatbot.Library.Models.ApiRequest.StreamStatus;
-using CoreCodedChatbot.Library.Models.ApiResponse.StreamStatus;
+using CoreCodedChatbot.ApiContract.RequestModels.StreamStatus;
+using CoreCodedChatbot.ApiContract.ResponseModels.StreamStatus;
 
 namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
 {
