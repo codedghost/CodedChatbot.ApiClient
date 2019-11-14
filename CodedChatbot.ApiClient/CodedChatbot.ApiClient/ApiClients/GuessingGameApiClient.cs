@@ -7,48 +7,77 @@ using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
 using CoreCodedChatbot.ApiContract.RequestModels.GuessingGame;
 using CoreCodedChatbot.Config;
 using CoreCodedChatbot.Secrets;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace CoreCodedChatbot.ApiClient.ApiClients
 {
     public class GuessingGameApiClient : IGuessingGameApiClient
     {
+        private readonly ILogger<IGuessingGameApiClient> _logger;
         private HttpClient _guessingGameClient;
 
-        public GuessingGameApiClient(IConfigService configService, ISecretService secretService)
+        public GuessingGameApiClient(
+            IConfigService configService,
+            ISecretService secretService,
+            ILogger<IGuessingGameApiClient> logger
+        )
         {
+            _logger = logger;
             _guessingGameClient = new HttpClient
             {
                 BaseAddress = new Uri(configService.Get<string>("GuessingGameApiUrl")),
                 DefaultRequestHeaders =
                 {
-                    Authorization = new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
+                    Authorization =
+                        new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
                 }
             };
         }
 
         public async Task<bool> StartGuessingGame(StartGuessingGameRequest songInfo)
         {
-            var result = await _guessingGameClient.PostAsync("StartGuessingGame",
-                HttpClientHelper.GetJsonData(songInfo));
+            try
+            {
+                var result = await _guessingGameClient.PostAsync("StartGuessingGame",
+                    HttpClientHelper.GetJsonData(songInfo));
 
-            return result.IsSuccessStatusCode;
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[]{songInfo});
+            }
         }
 
         public async Task<bool> FinishGuessingGame(decimal finalPercentage)
         {
-            var result = await _guessingGameClient.PostAsync("FinishGuessingGame",
-                HttpClientHelper.GetJsonData(finalPercentage));
+            try
+            {
+                var result = await _guessingGameClient.PostAsync("FinishGuessingGame",
+                    HttpClientHelper.GetJsonData(finalPercentage));
 
-            return result.IsSuccessStatusCode;
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] {finalPercentage});
+            }
         }
 
         public async Task<bool> SubmitGuess(SubmitGuessRequest submitGuessModel)
         {
-            var result = await _guessingGameClient.PostAsync("SubmitGuess",
-                HttpClientHelper.GetJsonData(submitGuessModel));
+            try
+            {
+                var result = await _guessingGameClient.PostAsync("SubmitGuess",
+                    HttpClientHelper.GetJsonData(submitGuessModel));
 
-            return result.IsSuccessStatusCode;
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] {submitGuessModel.Guess, submitGuessModel.Username});
+            }
         }
     }
 }

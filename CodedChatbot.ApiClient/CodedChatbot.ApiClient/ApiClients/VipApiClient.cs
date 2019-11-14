@@ -7,15 +7,22 @@ using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
 using CoreCodedChatbot.ApiContract.RequestModels.Vip;
 using CoreCodedChatbot.Config;
 using CoreCodedChatbot.Secrets;
+using Microsoft.Extensions.Logging;
 
 namespace CoreCodedChatbot.ApiClient.ApiClients
 {
     public class VipApiClient : IVipApiClient
     {
+        private readonly ILogger<IVipApiClient> _logger;
         private HttpClient _client;
 
-        public VipApiClient(IConfigService configService, ISecretService secretService)
+        public VipApiClient(
+            IConfigService configService,
+            ISecretService secretService, 
+            ILogger<IVipApiClient> logger
+        )
         {
+            _logger = logger;
             _client = new HttpClient
             {
                 BaseAddress = new Uri(configService.Get<string>("VipApiUrl")),
@@ -28,17 +35,31 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
 
         public async Task<bool> GiftVip(GiftVipRequest giftVipModel)
         {
-            var result =  await _client.PostAsync("GiftVip",
-                   HttpClientHelper.GetJsonData(giftVipModel));
+            try
+            {
+                var result = await _client.PostAsync("GiftVip",
+                    HttpClientHelper.GetJsonData(giftVipModel));
 
-            return result.IsSuccessStatusCode;
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] {giftVipModel.DonorUsername, giftVipModel.ReceiverUsername});
+            }
         }
 
         public async Task<bool> ModGiveVip(ModGiveVipRequest modGiveVipModel)
         {
-            var result = await _client.PostAsync("ModGiveVip", HttpClientHelper.GetJsonData(modGiveVipModel));
+            try
+            {
+                var result = await _client.PostAsync("ModGiveVip", HttpClientHelper.GetJsonData(modGiveVipModel));
 
-            return result.IsSuccessStatusCode;
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] {modGiveVipModel.ReceivingUsername, modGiveVipModel.VipsToGive});
+            }
         }
     }
 }
