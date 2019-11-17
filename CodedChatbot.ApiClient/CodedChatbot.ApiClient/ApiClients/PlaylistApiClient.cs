@@ -238,5 +238,19 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 return HttpClientHelper.LogError<bool>(_logger, e, new object[] {});
             }
         }
+
+        public async Task<PlaylistModel> GetAllCurrentSongRequests()
+        {
+            try
+            {
+                var result = await _playlistClient.GetAsync("GetAllCurrentSongRequests");
+
+                return JsonConvert.DeserializeObject<PlaylistModel>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<PlaylistModel>(_logger, e, new object[] { });
+            }
+        }
     }
 }
