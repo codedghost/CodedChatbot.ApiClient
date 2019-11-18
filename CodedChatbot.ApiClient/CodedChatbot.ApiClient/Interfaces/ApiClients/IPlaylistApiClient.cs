@@ -21,5 +21,7 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
         Task<EditRequestResponse> EditSuperVip(EditSuperVipRequest editSuperVipRequest);
         Task<int> PromoteSong(PromoteSongRequest promoteSongRequest);
         Task<bool> ClearRequests();
+        Task<GetAllSongsResponse> GetAllCurrentSongRequests();
+        Task<GetRequestByIdResponse> GetRequestById(int songId);
     }
 }
