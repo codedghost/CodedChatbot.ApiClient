@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using CoreCodedChatbot.ApiClient.DataHelper;
 using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
 using CoreCodedChatbot.ApiContract.RequestModels.Vip;
+using CoreCodedChatbot.ApiContract.ResponseModels.Vip;
 using CoreCodedChatbot.Config;
 using CoreCodedChatbot.Secrets;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace CoreCodedChatbot.ApiClient.ApiClients
 {
@@ -59,6 +61,22 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             catch (Exception e)
             {
                 return HttpClientHelper.LogError<bool>(_logger, e, new object[] {modGiveVipModel.ReceivingUsername, modGiveVipModel.VipsToGive});
+            }
+        }
+
+        public async Task<DoesUserHaveVipResponseModel> DoesUserHaveVip(
+            DoesUserHaveVipRequestModel doesUserHaveVipRequestModel)
+        {
+            try
+            {
+                var result = await _client.GetAsync($"DoesUserHaveVip?username={doesUserHaveVipRequestModel.Username}");
+
+                return JsonConvert.DeserializeObject<DoesUserHaveVipResponseModel>(
+                    await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<DoesUserHaveVipResponseModel>(_logger, e, new object[] {doesUserHaveVipRequestModel.Username});
             }
         }
     }

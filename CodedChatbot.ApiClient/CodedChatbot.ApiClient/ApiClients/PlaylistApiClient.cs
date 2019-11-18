@@ -239,17 +239,31 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             }
         }
 
-        public async Task<PlaylistModel> GetAllCurrentSongRequests()
+        public async Task<GetAllSongsResponse> GetAllCurrentSongRequests()
         {
             try
             {
                 var result = await _playlistClient.GetAsync("GetAllCurrentSongRequests");
 
-                return JsonConvert.DeserializeObject<PlaylistModel>(await result.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<GetAllSongsResponse>(await result.Content.ReadAsStringAsync());
             }
             catch (Exception e)
             {
-                return HttpClientHelper.LogError<PlaylistModel>(_logger, e, new object[] { });
+                return HttpClientHelper.LogError<GetAllSongsResponse>(_logger, e, new object[] { });
+            }
+        }
+
+        public async Task<GetRequestByIdResponse> GetRequestById(int songId)
+        {
+            try
+            {
+                var result = await _playlistClient.GetAsync($"GetRequestById?songId={songId}");
+
+                return JsonConvert.DeserializeObject<GetRequestByIdResponse>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<GetRequestByIdResponse>(_logger, e, new object[] { });
             }
         }
     }
