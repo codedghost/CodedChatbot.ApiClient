@@ -9,5 +9,7 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
         Task<bool> GiftVip(GiftVipRequest giftVipModel);
         Task<bool> ModGiveVip(ModGiveVipRequest modGiveVipModel);
         Task<DoesUserHaveVipResponseModel> DoesUserHaveVip(DoesUserHaveVipRequestModel doesUserHaveVipRequestModel);
+        Task<DoesUserHaveSuperVipResponseModel> DoesUserHaveSuperVip(DoesUserHaveSuperVipRequestModel doesUserHaveSuperVipRequestModel);
+        Task<IsSuperVipInQueueResponse> IsSuperVipInQueue();
     }
 }

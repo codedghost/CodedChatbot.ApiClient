@@ -79,5 +79,39 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 return HttpClientHelper.LogError<DoesUserHaveVipResponseModel>(_logger, e, new object[] {doesUserHaveVipRequestModel.Username});
             }
         }
+
+        public async Task<DoesUserHaveSuperVipResponseModel> DoesUserHaveSuperVip(
+            DoesUserHaveSuperVipRequestModel doesUserHaveSuperVipRequestModel)
+        {
+            try
+            {
+                var result =
+                    await _client.GetAsync(
+                        $"DoesUserHaveSuperVip?username={doesUserHaveSuperVipRequestModel.Username}");
+
+                return JsonConvert.DeserializeObject<DoesUserHaveSuperVipResponseModel>(
+                    await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<DoesUserHaveSuperVipResponseModel>(_logger, e,
+                    new object[] {doesUserHaveSuperVipRequestModel.Username});
+            }
+        }
+
+        public async Task<IsSuperVipInQueueResponse> IsSuperVipInQueue()
+        {
+            try
+            {
+                var result = await _client.GetAsync("IsSuperVipInQueue");
+
+                return JsonConvert.DeserializeObject<IsSuperVipInQueueResponse>(
+                    await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<IsSuperVipInQueueResponse>(_logger, e, new object[] { });
+            }
+        }
     }
 }

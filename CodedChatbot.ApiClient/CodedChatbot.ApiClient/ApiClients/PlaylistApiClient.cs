@@ -266,5 +266,109 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 return HttpClientHelper.LogError<GetRequestByIdResponse>(_logger, e, new object[] { });
             }
         }
+
+        public async Task<bool> ArchiveRequestById(int songId)
+        {
+            try
+            {
+                var result =
+                    await _playlistClient.PostAsync($"ArchiveRequestById", HttpClientHelper.GetJsonData(songId));
+
+                return JsonConvert.DeserializeObject<bool>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] { });
+            }
+        }
+
+        public async Task<bool> ArchiveCurrentRequest(int songId)
+        {
+            try
+            {
+                var result =
+                    await _playlistClient.PostAsync($"ArchiveCurrentRequest", HttpClientHelper.GetJsonData(songId));
+
+                return JsonConvert.DeserializeObject<bool>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] { });
+            }
+        }
+
+        public async Task<AddRequestResponse> AddWebRequest(AddWebSongRequest addWebSongRequest)
+        {
+            try
+            {
+                var result =
+                    await _playlistClient.PostAsync("AddWebRequest", HttpClientHelper.GetJsonData(addWebSongRequest));
+
+                return JsonConvert.DeserializeObject<AddRequestResponse>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<AddRequestResponse>(_logger, e, new object[] {addWebSongRequest});
+            }
+        }
+
+        public async Task<MaxUserRequestsResponse> GetMaxUserRequests()
+        {
+            try
+            {
+                var result = await _playlistClient.GetAsync("GetMaxUserRequests");
+
+                return JsonConvert.DeserializeObject<MaxUserRequestsResponse>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<MaxUserRequestsResponse>(_logger, e, new object[] {});
+            }
+        }
+
+        public async Task<EditRequestResponse> EditWebRequest(EditWebRequestRequestModel editWebRequestRequestModel)
+        {
+            try
+            {
+                var result = await _playlistClient.PostAsync("EditWebRequest",
+                    HttpClientHelper.GetJsonData(editWebRequestRequestModel));
+
+                return JsonConvert.DeserializeObject<EditRequestResponse>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<EditRequestResponse>(_logger, e, new object[] {editWebRequestRequestModel});
+            }
+        }
+
+        public async Task<int> PromoteWebRequest(PromoteWebRequestRequestModel promoteWebRequestRequestModel)
+        {
+            try
+            {
+                var result = await _playlistClient.PostAsync("PromoteWebRequest",
+                    HttpClientHelper.GetJsonData(promoteWebRequestRequestModel));
+
+                return JsonConvert.DeserializeObject<int>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<int>(_logger, e, new object[] {promoteWebRequestRequestModel});
+            }
+        }
+
+        public async Task<bool> AddRequestToDrive(AddSongToDriveRequest addSongToDriveRequest)
+        {
+            try
+            {
+                var result = await _playlistClient.PostAsync("AddRequestToDrive",
+                    HttpClientHelper.GetJsonData(addSongToDriveRequest));
+
+                return JsonConvert.DeserializeObject<bool>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] {addSongToDriveRequest});
+            }
+        }
     }
 }
