@@ -272,7 +272,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             try
             {
                 var result =
-                    await _playlistClient.PostAsync($"ArchiveRequestById", HttpClientHelper.GetJsonData(songId));
+                    await _playlistClient.DeleteAsync($"ArchiveRequestById?songId={songId}");
 
                 return JsonConvert.DeserializeObject<bool>(await result.Content.ReadAsStringAsync());
             }
@@ -287,7 +287,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             try
             {
                 var result =
-                    await _playlistClient.PostAsync($"ArchiveCurrentRequest", HttpClientHelper.GetJsonData(songId));
+                    await _playlistClient.DeleteAsync($"ArchiveCurrentRequest?songId={songId}");
 
                 return JsonConvert.DeserializeObject<bool>(await result.Content.ReadAsStringAsync());
             }
