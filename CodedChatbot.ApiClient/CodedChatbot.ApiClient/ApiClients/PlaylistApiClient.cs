@@ -326,33 +326,33 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             }
         }
 
-        public async Task<EditRequestResponse> EditWebRequest(EditWebRequestRequestModel editWebRequestRequestModel)
+        public async Task<EditWebRequestResponse> EditWebRequest(EditWebRequestRequestModel editWebRequestRequestModel)
         {
             try
             {
                 var result = await _playlistClient.PostAsync("EditWebRequest",
                     HttpClientHelper.GetJsonData(editWebRequestRequestModel));
 
-                return JsonConvert.DeserializeObject<EditRequestResponse>(await result.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<EditWebRequestResponse>(await result.Content.ReadAsStringAsync());
             }
             catch (Exception e)
             {
-                return HttpClientHelper.LogError<EditRequestResponse>(_logger, e, new object[] {editWebRequestRequestModel});
+                return HttpClientHelper.LogError<EditWebRequestResponse>(_logger, e, new object[] {editWebRequestRequestModel});
             }
         }
 
-        public async Task<int> PromoteWebRequest(PromoteWebRequestRequestModel promoteWebRequestRequestModel)
+        public async Task<PromoteRequestResult> PromoteWebRequest(PromoteWebRequestRequestModel promoteWebRequestRequestModel)
         {
             try
             {
                 var result = await _playlistClient.PostAsync("PromoteWebRequest",
                     HttpClientHelper.GetJsonData(promoteWebRequestRequestModel));
 
-                return JsonConvert.DeserializeObject<int>(await result.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<PromoteRequestResult>(await result.Content.ReadAsStringAsync());
             }
             catch (Exception e)
             {
-                return HttpClientHelper.LogError<int>(_logger, e, new object[] {promoteWebRequestRequestModel});
+                return HttpClientHelper.LogError<PromoteRequestResult>(_logger, e, new object[] {promoteWebRequestRequestModel});
             }
         }
 

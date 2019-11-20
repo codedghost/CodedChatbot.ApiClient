@@ -27,8 +27,8 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
         Task<bool> ArchiveCurrentRequest(int songId);
         Task<AddRequestResponse> AddWebRequest(AddWebSongRequest addWebSongRequest);
         Task<MaxUserRequestsResponse> GetMaxUserRequests();
-        Task<EditRequestResponse> EditWebRequest(EditWebRequestRequestModel editWebRequestRequestModel);
-        Task<int> PromoteWebRequest(PromoteWebRequestRequestModel promoteWebRequestRequestModel);
+        Task<EditWebRequestResponse> EditWebRequest(EditWebRequestRequestModel editWebRequestRequestModel);
+        Task<PromoteRequestResult> PromoteWebRequest(PromoteWebRequestRequestModel promoteWebRequestRequestModel);
         Task<bool> AddRequestToDrive(AddSongToDriveRequest addSongToDriveRequest);
     }
 }
