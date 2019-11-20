@@ -243,7 +243,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
         {
             try
             {
-                var result = await _playlistClient.GetAsync("GetAllCurrentSongRequests");
+                var result = await _playlistClient.GetAsync("GetAllSongs");
 
                 return JsonConvert.DeserializeObject<GetAllSongsResponse>(await result.Content.ReadAsStringAsync());
             }
