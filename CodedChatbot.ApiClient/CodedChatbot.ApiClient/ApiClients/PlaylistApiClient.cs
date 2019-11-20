@@ -363,7 +363,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 var result = await _playlistClient.PostAsync("AddRequestToDrive",
                     HttpClientHelper.GetJsonData(addSongToDriveRequest));
 
-                return JsonConvert.DeserializeObject<bool>(await result.Content.ReadAsStringAsync());
+                return result.IsSuccessStatusCode;
             }
             catch (Exception e)
             {
