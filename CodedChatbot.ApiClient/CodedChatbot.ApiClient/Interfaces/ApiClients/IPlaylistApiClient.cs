@@ -28,7 +28,7 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
         Task<AddRequestResponse> AddWebRequest(AddWebSongRequest addWebSongRequest);
         Task<MaxUserRequestsResponse> GetMaxUserRequests();
         Task<EditWebRequestResponse> EditWebRequest(EditWebRequestRequestModel editWebRequestRequestModel);
-        Task<PromoteRequestResult> PromoteWebRequest(PromoteWebRequestRequestModel promoteWebRequestRequestModel);
+        Task<PromoteWebRequestResponseModel> PromoteWebRequest(PromoteWebRequestRequestModel promoteWebRequestRequestModel);
         Task<bool> AddRequestToDrive(AddSongToDriveRequest addSongToDriveRequest);
     }
 }
