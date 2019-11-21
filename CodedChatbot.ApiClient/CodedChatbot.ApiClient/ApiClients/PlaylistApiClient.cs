@@ -341,18 +341,18 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             }
         }
 
-        public async Task<PromoteRequestResult> PromoteWebRequest(PromoteWebRequestRequestModel promoteWebRequestRequestModel)
+        public async Task<PromoteWebRequestResponseModel> PromoteWebRequest(PromoteWebRequestRequestModel promoteWebRequestRequestModel)
         {
             try
             {
                 var result = await _playlistClient.PostAsync("PromoteWebRequest",
                     HttpClientHelper.GetJsonData(promoteWebRequestRequestModel));
 
-                return JsonConvert.DeserializeObject<PromoteRequestResult>(await result.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<PromoteWebRequestResponseModel>(await result.Content.ReadAsStringAsync());
             }
             catch (Exception e)
             {
-                return HttpClientHelper.LogError<PromoteRequestResult>(_logger, e, new object[] {promoteWebRequestRequestModel});
+                return HttpClientHelper.LogError<PromoteWebRequestResponseModel>(_logger, e, new object[] {promoteWebRequestRequestModel});
             }
         }
 
