@@ -13,21 +13,21 @@ using Newtonsoft.Json;
 
 namespace CoreCodedChatbot.ApiClient.ApiClients
 {
-    public class StreamStatusClient : IStreamStatusClient
+    public class StreamStatusApiClient : IStreamStatusApiClient
     {
-        private readonly ILogger<IStreamStatusClient> _logger;
-        private HttpClient _streamStatusClient;
+        private readonly ILogger<IStreamStatusApiClient> _logger;
+        private readonly HttpClient _streamStatusClient;
 
-        public StreamStatusClient(
+        public StreamStatusApiClient(
             IConfigService configService,
             ISecretService secretService,
-            ILogger<IStreamStatusClient> logger
+            ILogger<IStreamStatusApiClient> logger
         )
         {
             _logger = logger;
             _streamStatusClient = new HttpClient
             {
-                BaseAddress = new Uri(configService.Get<string>("StreamStatusApiUrl")),
+                BaseAddress = new Uri($"{configService.Get<string>("ApiBaseAddress")}/StreamStatus/"),
                 DefaultRequestHeaders =
                 {
                     Authorization =

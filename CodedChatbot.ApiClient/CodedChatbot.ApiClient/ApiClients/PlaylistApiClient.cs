@@ -27,7 +27,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             _logger = logger;
             _playlistClient = new HttpClient
             {
-                BaseAddress = new Uri(configService.Get<string>("PlaylistApiUrl")),
+                BaseAddress = new Uri($"{configService.Get<string>("ApiBaseAddress")}/Playlist/"),
                 DefaultRequestHeaders =
                 {
                     Authorization = new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
