@@ -4,7 +4,7 @@ using CoreCodedChatbot.ApiContract.ResponseModels.StreamStatus;
 
 namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
 {
-    public interface IStreamStatusClient
+    public interface IStreamStatusApiClient
     {
         Task<GetStreamStatusResponse> GetStreamStatus(GetStreamStatusRequest getStreamStatusRequest);
         Task<bool> SaveStreamStatus(PutStreamStatusRequest putStreamStatusRequest);

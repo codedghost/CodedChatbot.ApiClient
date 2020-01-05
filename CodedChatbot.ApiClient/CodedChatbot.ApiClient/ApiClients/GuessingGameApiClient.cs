@@ -8,7 +8,6 @@ using CoreCodedChatbot.ApiContract.RequestModels.GuessingGame;
 using CoreCodedChatbot.Config;
 using CoreCodedChatbot.Secrets;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace CoreCodedChatbot.ApiClient.ApiClients
 {
@@ -26,7 +25,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             _logger = logger;
             _guessingGameClient = new HttpClient
             {
-                BaseAddress = new Uri(configService.Get<string>("GuessingGameApiUrl")),
+                BaseAddress = new Uri($"{configService.Get<string>("ApiBaseAddress")}/GuessingGame/"),
                 DefaultRequestHeaders =
                 {
                     Authorization =
