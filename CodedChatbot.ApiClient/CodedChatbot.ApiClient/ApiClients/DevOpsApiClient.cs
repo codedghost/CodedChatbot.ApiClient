@@ -84,5 +84,20 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                     });
             }
         }
+
+        public async Task<GetAllBacklogWorkItemsResponse> GetAllBacklogWorkItems()
+        {
+            try
+            {
+                var result = await _client.GetAsync("GetAllBacklogWorkItems");
+
+                return JsonConvert.DeserializeObject<GetAllBacklogWorkItemsResponse>(
+                    await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<GetAllBacklogWorkItemsResponse>(_logger, e, new object[] { });
+            }
+        }
     }
 }
