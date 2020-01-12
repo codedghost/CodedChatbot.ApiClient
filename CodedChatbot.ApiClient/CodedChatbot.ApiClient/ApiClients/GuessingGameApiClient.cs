@@ -23,15 +23,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
         )
         {
             _logger = logger;
-            _guessingGameClient = new HttpClient
-            {
-                BaseAddress = new Uri($"{configService.Get<string>("ApiBaseAddress")}/GuessingGame/"),
-                DefaultRequestHeaders =
-                {
-                    Authorization =
-                        new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
-                }
-            };
+            _guessingGameClient = HttpClientHelper.BuildClient(configService, secretService, "GuessingGame");
         }
 
         public async Task<bool> StartGuessingGame(StartGuessingGameRequest songInfo)

@@ -3,6 +3,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using CoreCodedChatbot.Config;
+using CoreCodedChatbot.Secrets;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -25,6 +27,18 @@ namespace CoreCodedChatbot.ApiClient.DataHelper
 
             logger.LogError(e, $"Error encountered in Api Client Method. Data - {argsString}");
             return (T) default;
+        }
+
+        public static HttpClient BuildClient(IConfigService configService, ISecretService secretService, string controllerName)
+        {
+            return new HttpClient
+            {
+                BaseAddress = new Uri(new Uri(configService.Get<string>("ApiBaseAddress")), new Uri(controllerName)),
+                DefaultRequestHeaders =
+                {
+                    Authorization = new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
+                }
+            };
         }
     }
 }

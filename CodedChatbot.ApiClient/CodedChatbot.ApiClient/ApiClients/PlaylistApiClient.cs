@@ -25,14 +25,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             ILogger<IPlaylistApiClient> logger)
         {
             _logger = logger;
-            _playlistClient = new HttpClient
-            {
-                BaseAddress = new Uri($"{configService.Get<string>("ApiBaseAddress")}/Playlist/"),
-                DefaultRequestHeaders =
-                {
-                    Authorization = new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
-                }
-            };
+            _playlistClient = HttpClientHelper.BuildClient(configService, secretService, "Playlist");
         }
 
         public async Task<EditRequestResponse> EditRequest(EditSongRequest editSongRequest)
