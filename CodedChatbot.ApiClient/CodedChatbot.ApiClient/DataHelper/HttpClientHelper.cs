@@ -33,7 +33,7 @@ namespace CoreCodedChatbot.ApiClient.DataHelper
         {
             return new HttpClient
             {
-                BaseAddress = new Uri($"{configService.Get<string>("ApiBaseAddress").Trim('/')}/{controllerName}"),
+                BaseAddress = new Uri($"{configService.Get<string>("ApiBaseAddress").Trim('/')}/{controllerName}/"),
                 DefaultRequestHeaders =
                 {
                     Authorization = new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
