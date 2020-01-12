@@ -40,5 +40,13 @@ namespace CoreCodedChatbot.ApiClient.DataHelper
                 }
             };
         }
+
+        public static JsonSerializerSettings GetJsonSerializerSettings()
+        {
+            return new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto
+            };
+        }
     }
 }

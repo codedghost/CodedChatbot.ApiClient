@@ -34,7 +34,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             {
                 var result = await _client.GetAsync($"GetWorkItemsById/{id}");
 
-                return JsonConvert.DeserializeObject<GetWorkItemByIdResponse>(await result.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<GetWorkItemByIdResponse>(await result.Content.ReadAsStringAsync(), HttpClientHelper.GetJsonSerializerSettings());
             }
             catch (Exception e)
             {
@@ -49,7 +49,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 var result = await _client.GetAsync("GetAllCurrentWorkItems");
 
                 return JsonConvert.DeserializeObject<GetAllCurrentWorkItemsResponse>(
-                    await result.Content.ReadAsStringAsync());
+                    await result.Content.ReadAsStringAsync(), HttpClientHelper.GetJsonSerializerSettings());
             }
             catch (Exception e)
             {
@@ -84,7 +84,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 var result = await _client.GetAsync("GetAllBacklogWorkItems");
 
                 return JsonConvert.DeserializeObject<GetAllBacklogWorkItemsResponse>(
-                    await result.Content.ReadAsStringAsync());
+                    await result.Content.ReadAsStringAsync(), HttpClientHelper.GetJsonSerializerSettings());
             }
             catch (Exception e)
             {
