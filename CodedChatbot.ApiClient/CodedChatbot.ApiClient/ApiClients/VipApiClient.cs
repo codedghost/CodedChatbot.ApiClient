@@ -25,14 +25,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
         )
         {
             _logger = logger;
-            _client = new HttpClient
-            {
-                BaseAddress = new Uri($"{configService.Get<string>("ApiBaseAddress")}/Vip"),
-                DefaultRequestHeaders =
-                {
-                    Authorization = new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
-                }
-            };
+            _client = HttpClientHelper.BuildClient(configService, secretService, "Vip");
         }
 
         public async Task<bool> GiftVip(GiftVipRequest giftVipModel)

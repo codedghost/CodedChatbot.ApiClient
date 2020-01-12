@@ -25,15 +25,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
         )
         {
             _logger = logger;
-            _streamStatusClient = new HttpClient
-            {
-                BaseAddress = new Uri($"{configService.Get<string>("ApiBaseAddress")}/StreamStatus/"),
-                DefaultRequestHeaders =
-                {
-                    Authorization =
-                        new AuthenticationHeaderValue("Bearer", secretService.GetSecret<string>("JwtTokenString"))
-                }
-            };
+            _streamStatusClient = HttpClientHelper.BuildClient(configService, secretService, "StreamStatus");
         }
 
         public async Task<GetStreamStatusResponse> GetStreamStatus(GetStreamStatusRequest getStreamStatusRequest)
