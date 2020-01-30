@@ -13,6 +13,7 @@ namespace CoreCodedChatbot.ApiClient
             services.AddSingleton<IPlaylistApiClient, PlaylistApiClient>();
             services.AddSingleton<IStreamStatusApiClient, StreamStatusApiClient>();
             services.AddSingleton<IVipApiClient, VipApiClient>();
+            services.AddSingleton<IQuoteApiClient, QuoteApiClient>();
 
             return services;
         }
