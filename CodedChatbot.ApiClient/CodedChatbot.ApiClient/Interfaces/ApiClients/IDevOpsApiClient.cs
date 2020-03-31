@@ -10,5 +10,6 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
         Task<GetAllCurrentWorkItemsResponse> GetAllCurrentWorkItems();
         Task<bool> RaiseBug(RaiseBugRequest raiseBugRequest);
         Task<GetAllBacklogWorkItemsResponse> GetAllBacklogWorkItems();
+        Task<bool> PracticeSongRequest(PracticeSongRequest practiceSongRequest);
     }
 }

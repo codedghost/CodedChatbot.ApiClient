@@ -91,5 +91,25 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 return HttpClientHelper.LogError<GetAllBacklogWorkItemsResponse>(_logger, e, new object[] { });
             }
         }
+
+        public async Task<bool> PracticeSongRequest(PracticeSongRequest practiceSongRequest)
+        {
+            try
+            {
+                var result = await _client.PostAsync("PracticeSongRequest", HttpClientHelper.GetJsonData(practiceSongRequest));
+
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e,
+                    new object[]
+                    {
+                        practiceSongRequest.SongName, 
+                        practiceSongRequest.ExtraInformation,
+                        practiceSongRequest.Username
+                    });
+            }
+        }
     }
 }
