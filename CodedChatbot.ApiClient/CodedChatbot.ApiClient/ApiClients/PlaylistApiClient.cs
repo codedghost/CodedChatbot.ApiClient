@@ -363,5 +363,20 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 return HttpClientHelper.LogError<bool>(_logger, e, new object[] {addSongToDriveRequest});
             }
         }
+
+        public async Task<GetCurrentSongRequestResponse> GetCurrentSongRequest()
+        {
+            try
+            {
+                var result = await _playlistClient.GetAsync("GetCurrentSongRequest");
+
+                return JsonConvert.DeserializeObject<GetCurrentSongRequestResponse>(
+                    await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<GetCurrentSongRequestResponse>(_logger, e, new object[] { });
+            }
+        }
     }
 }
