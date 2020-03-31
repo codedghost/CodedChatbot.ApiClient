@@ -14,6 +14,7 @@ namespace CoreCodedChatbot.ApiClient
             services.AddSingleton<IStreamStatusApiClient, StreamStatusApiClient>();
             services.AddSingleton<IVipApiClient, VipApiClient>();
             services.AddSingleton<IQuoteApiClient, QuoteApiClient>();
+            services.AddSingleton<ISearchApiClient, SearchApiClient>();
 
             return services;
         }
