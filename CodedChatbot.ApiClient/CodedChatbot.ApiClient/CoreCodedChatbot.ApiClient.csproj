@@ -10,9 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CoreCodedChatbot.ApiContract" Version="1.0.534" />
+    <PackageReference Include="CoreCodedChatbot.ApiContract" Version="1.0.575" />
     <PackageReference Include="CoreCodedChatbot.Config" Version="1.0.345" />
-    <PackageReference Include="CoreCodedChatbot.Secrets" Version="1.0.557" />
+    <PackageReference Include="CoreCodedChatbot.Secrets" Version="1.0.568" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 

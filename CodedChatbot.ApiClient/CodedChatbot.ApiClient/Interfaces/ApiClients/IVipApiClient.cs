@@ -11,5 +11,6 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
         Task<DoesUserHaveVipResponseModel> DoesUserHaveVip(DoesUserHaveVipRequestModel doesUserHaveVipRequestModel);
         Task<DoesUserHaveSuperVipResponseModel> DoesUserHaveSuperVip(DoesUserHaveSuperVipRequestModel doesUserHaveSuperVipRequestModel);
         Task<IsSuperVipInQueueResponse> IsSuperVipInQueue();
+        Task<GetUserVipCountResponse> GetUserVipCount(GetUserVipCountRequest request);
     }
 }

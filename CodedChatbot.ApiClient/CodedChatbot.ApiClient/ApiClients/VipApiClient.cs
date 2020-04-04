@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using CoreCodedChatbot.ApiClient.DataHelper;
 using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
@@ -104,6 +105,21 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             catch (Exception e)
             {
                 return HttpClientHelper.LogError<IsSuperVipInQueueResponse>(_logger, e, new object[] { });
+            }
+        }
+
+        public async Task<GetUserVipCountResponse> GetUserVipCount(GetUserVipCountRequest request)
+        {
+            try
+            {
+                var result = await _client.GetAsync("GetUserVipCount");
+
+                return JsonConvert.DeserializeObject<GetUserVipCountResponse>(
+                    await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<GetUserVipCountResponse>(_logger, e, new[] {request.Username});
             }
         }
     }
