@@ -112,7 +112,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
         {
             try
             {
-                var result = await _client.GetAsync("GetUserVipCount");
+                var result = await _client.GetAsync($"GetUserVipCount?username={request.Username}");
 
                 return JsonConvert.DeserializeObject<GetUserVipCountResponse>(
                     await result.Content.ReadAsStringAsync());
