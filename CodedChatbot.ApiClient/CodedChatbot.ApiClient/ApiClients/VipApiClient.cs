@@ -122,5 +122,19 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 return HttpClientHelper.LogError<GetUserVipCountResponse>(_logger, e, new[] {request.Username});
             }
         }
+
+        public async Task<bool> GiveSubscriptionVip(GiveSubscriptionVipRequest request)
+        {
+            try
+            {
+                var result = await _client.PostAsync("GiveSubscriptionVip", HttpClientHelper.GetJsonData(request));
+
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] {request.Username, request.SubStreak});
+            }
+        }
     }
 }
