@@ -123,17 +123,17 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             }
         }
 
-        public async Task<bool> GiveSubscriptionVip(GiveSubscriptionVipRequest request)
+        public async Task<bool> GiveSubscriptionVips(GiveSubscriptionVipsRequest request)
         {
             try
             {
-                var result = await _client.PostAsync("GiveSubscriptionVip", HttpClientHelper.GetJsonData(request));
+                var result = await _client.PostAsync("GiveSubscriptionVips", HttpClientHelper.GetJsonData(request));
 
                 return result.IsSuccessStatusCode;
             }
             catch (Exception e)
             {
-                return HttpClientHelper.LogError<bool>(_logger, e, new object[] {request.Username, request.SubStreak});
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] {string.Join(", ", request.Username)});
             }
         }
     }
