@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using CoreCodedChatbot.ApiClient.DataHelper;
 using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
@@ -203,18 +202,18 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             }
         }
 
-        public async Task<int> PromoteSong(PromoteSongRequest promoteSongRequest)
+        public async Task<PromoteSongResponse> PromoteSong(PromoteSongRequest promoteSongRequest)
         {
             try
             {
                 var result = await _playlistClient.PostAsync("PromoteRequest",
                     HttpClientHelper.GetJsonData(promoteSongRequest));
 
-                return JsonConvert.DeserializeObject<int>(await result.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<PromoteSongResponse>(await result.Content.ReadAsStringAsync());
             }
             catch (Exception e)
             {
-                return HttpClientHelper.LogError<int>(_logger, e, new object[] {promoteSongRequest.Username});
+                return HttpClientHelper.LogError<PromoteSongResponse>(_logger, e, new object[] {promoteSongRequest.Username});
             }
         }
 
@@ -331,21 +330,6 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             catch (Exception e)
             {
                 return HttpClientHelper.LogError<EditWebRequestResponse>(_logger, e, new object[] {editWebRequestRequestModel});
-            }
-        }
-
-        public async Task<PromoteWebRequestResponseModel> PromoteWebRequest(PromoteWebRequestRequestModel promoteWebRequestRequestModel)
-        {
-            try
-            {
-                var result = await _playlistClient.PostAsync("PromoteWebRequest",
-                    HttpClientHelper.GetJsonData(promoteWebRequestRequestModel));
-
-                return JsonConvert.DeserializeObject<PromoteWebRequestResponseModel>(await result.Content.ReadAsStringAsync());
-            }
-            catch (Exception e)
-            {
-                return HttpClientHelper.LogError<PromoteWebRequestResponseModel>(_logger, e, new object[] {promoteWebRequestRequestModel});
             }
         }
 

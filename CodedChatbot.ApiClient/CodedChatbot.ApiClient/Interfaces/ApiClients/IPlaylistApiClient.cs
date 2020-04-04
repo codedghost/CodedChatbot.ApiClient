@@ -19,7 +19,7 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
         Task<AddRequestResponse> AddSong(AddSongRequest addSongRequest);
         Task<AddRequestResponse> AddSuperVip(AddSuperVipRequest addSuperVipRequest);
         Task<EditRequestResponse> EditSuperVip(EditSuperVipRequest editSuperVipRequest);
-        Task<int> PromoteSong(PromoteSongRequest promoteSongRequest);
+        Task<PromoteSongResponse> PromoteSong(PromoteSongRequest promoteSongRequest);
         Task<bool> ClearRequests();
         Task<GetAllSongsResponse> GetAllCurrentSongRequests();
         Task<GetRequestByIdResponse> GetRequestById(int songId);
@@ -28,7 +28,6 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
         Task<AddRequestResponse> AddWebRequest(AddWebSongRequest addWebSongRequest);
         Task<MaxUserRequestsResponse> GetMaxUserRequests();
         Task<EditWebRequestResponse> EditWebRequest(EditWebRequestRequestModel editWebRequestRequestModel);
-        Task<PromoteWebRequestResponseModel> PromoteWebRequest(PromoteWebRequestRequestModel promoteWebRequestRequestModel);
         Task<bool> AddRequestToDrive(AddSongToDriveRequest addSongToDriveRequest);
         Task<GetCurrentSongRequestResponse> GetCurrentSongRequest();
     }
