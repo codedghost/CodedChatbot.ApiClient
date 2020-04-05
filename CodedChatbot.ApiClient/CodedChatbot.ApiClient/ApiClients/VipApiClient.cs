@@ -136,5 +136,33 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 return HttpClientHelper.LogError<bool>(_logger, e, new object[] {string.Join(", ", request.Username)});
             }
         }
+
+        public async Task<bool> UpdateBitsDropped(UpdateTotalBitsDroppedRequest request)
+        {
+            try
+            {
+                var result = await _client.PostAsync("UpdateBitsDropped", HttpClientHelper.GetJsonData(request));
+
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] { request.Username, request.TotalBitsDropped });
+            }
+        }
+
+        public async Task<bool> UpdateDonatedAmount(UpdateDonatedAmountRequest request)
+        {
+            try
+            {
+                var result = await _client.PostAsync("UpdateDonatedAmount", HttpClientHelper.GetJsonData(request));
+
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] { request.Username, request.AmountDonated });
+            }
+        }
     }
 }
