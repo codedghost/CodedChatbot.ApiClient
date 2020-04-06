@@ -123,6 +123,21 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             }
         }
 
+        public async Task<GetUserByteCountResponse> GetUserByteCount(string username)
+        {
+            try
+            {
+                var result = await _client.GetAsync($"GetUserByteCount?username={username}");
+
+                return JsonConvert.DeserializeObject<GetUserByteCountResponse>(
+                    await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<GetUserByteCountResponse>(_logger, e, new object[] {username});
+            }
+        }
+
         public async Task<bool> GiveSubscriptionVips(GiveSubscriptionVipsRequest request)
         {
             try
@@ -148,6 +163,37 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             catch (Exception e)
             {
                 return HttpClientHelper.LogError<bool>(_logger, e, new object[] { request.Username, request.TotalBitsDropped });
+            }
+        }
+
+        public async Task<ByteConversionResponse> ConvertBytes(ConvertVipsRequest request)
+        {
+            try
+            {
+                var result = await _client.PostAsync("ConvertBytes", HttpClientHelper.GetJsonData(request));
+
+                return JsonConvert.DeserializeObject<ByteConversionResponse>(
+                    await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<ByteConversionResponse>(_logger, e,
+                    new object[] {request.Username, request.NumberOfBytes});
+            }
+        }
+
+        public async Task<ByteConversionResponse> ConvertAllBytes(ConvertAllVipsRequest request)
+        {
+            try
+            {
+                var result = await _client.PostAsync("ConvertAllBytes", HttpClientHelper.GetJsonData(request));
+
+                return JsonConvert.DeserializeObject<ByteConversionResponse>(
+                    await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<ByteConversionResponse>(_logger, e, new object[] { request.Username});
             }
         }
     }
