@@ -14,6 +14,5 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
         Task<GetUserVipCountResponse> GetUserVipCount(GetUserVipCountRequest request);
         Task<bool> GiveSubscriptionVips(GiveSubscriptionVipsRequest request);
         Task<bool> UpdateBitsDropped(UpdateTotalBitsDroppedRequest request);
-        Task<bool> UpdateDonatedAmount(UpdateDonatedAmountRequest request);
     }
 }
