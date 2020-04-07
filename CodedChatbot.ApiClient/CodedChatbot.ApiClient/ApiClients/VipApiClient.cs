@@ -196,5 +196,19 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 return HttpClientHelper.LogError<ByteConversionResponse>(_logger, e, new object[] { request.Username});
             }
         }
+
+        public async Task<bool> GiveGiftSubBytes(GiveGiftSubBytesRequest request)
+        {
+            try
+            {
+                var result = await _client.PostAsync("GiveGiftSubBytes", HttpClientHelper.GetJsonData(request));
+
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] {request.Username});
+            }
+        }
     }
 }

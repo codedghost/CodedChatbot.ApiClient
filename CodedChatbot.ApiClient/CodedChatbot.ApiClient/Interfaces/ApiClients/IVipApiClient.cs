@@ -17,5 +17,6 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
         Task<ByteConversionResponse> ConvertAllBytes(ConvertAllVipsRequest request);
         Task<ByteConversionResponse> ConvertBytes(ConvertVipsRequest request);
         Task<GetUserByteCountResponse> GetUserByteCount(string username);
+        Task<bool> GiveGiftSubBytes(GiveGiftSubBytesRequest request);
     }
 }
