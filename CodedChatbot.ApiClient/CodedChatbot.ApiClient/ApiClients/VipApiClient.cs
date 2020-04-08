@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CoreCodedChatbot.ApiClient.DataHelper;
 using CoreCodedChatbot.ApiClient.Interfaces.ApiClients;
 using CoreCodedChatbot.ApiContract.RequestModels.Vip;
+using CoreCodedChatbot.ApiContract.ResponseModels.Playlist;
 using CoreCodedChatbot.ApiContract.ResponseModels.Vip;
 using CoreCodedChatbot.Config;
 using CoreCodedChatbot.Secrets;
@@ -208,6 +209,20 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             catch (Exception e)
             {
                 return HttpClientHelper.LogError<bool>(_logger, e, new object[] {request.Username});
+            }
+        }
+
+        public async Task<GetGiftedVipsResponse> GetGiftedVips(string username)
+        {
+            try
+            {
+                var result = await _client.GetAsync($"GetGiftedVips?username={username}");
+
+                return JsonConvert.DeserializeObject<GetGiftedVipsResponse>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<GetGiftedVipsResponse>(_logger, e, new object[] {username});
             }
         }
     }
