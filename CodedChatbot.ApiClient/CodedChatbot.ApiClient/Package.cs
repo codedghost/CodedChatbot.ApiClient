@@ -10,11 +10,12 @@ namespace CoreCodedChatbot.ApiClient
         {
             services.AddSingleton<IDevOpsApiClient, DevOpsApiClient>();
             services.AddSingleton<IGuessingGameApiClient, GuessingGameApiClient>();
+            services.AddSingleton<IModerationApiClient, ModerationApiClient>();
             services.AddSingleton<IPlaylistApiClient, PlaylistApiClient>();
-            services.AddSingleton<IStreamStatusApiClient, StreamStatusApiClient>();
-            services.AddSingleton<IVipApiClient, VipApiClient>();
             services.AddSingleton<IQuoteApiClient, QuoteApiClient>();
             services.AddSingleton<ISearchApiClient, SearchApiClient>();
+            services.AddSingleton<IStreamStatusApiClient, StreamStatusApiClient>();
+            services.AddSingleton<IVipApiClient, VipApiClient>();
 
             return services;
         }
