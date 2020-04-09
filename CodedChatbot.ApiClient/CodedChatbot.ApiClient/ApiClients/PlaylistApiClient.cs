@@ -362,5 +362,19 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 return HttpClientHelper.LogError<GetCurrentSongRequestResponse>(_logger, e, new object[] { });
             }
         }
+
+        public async Task<GetTopTenSongsResponse> GetTopTenSongs()
+        {
+            try
+            {
+                var result = await _playlistClient.GetAsync("GetTopTen");
+
+                return JsonConvert.DeserializeObject<GetTopTenSongsResponse>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<GetTopTenSongsResponse>(_logger, e, new object[] { });
+            }
+        }
     }
 }
