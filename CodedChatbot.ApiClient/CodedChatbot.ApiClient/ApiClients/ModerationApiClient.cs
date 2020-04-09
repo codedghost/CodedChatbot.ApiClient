@@ -22,7 +22,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             ILogger<IModerationApiClient> logger)
         {
             _logger = logger;
-            _moderationClient = HttpClientHelper.BuildClient(configService, secretService, "Playlist");
+            _moderationClient = HttpClientHelper.BuildClient(configService, secretService, "Moderation");
         }
 
         public async Task<bool> TransferUserAccount(TransferUserAccountRequest request)
