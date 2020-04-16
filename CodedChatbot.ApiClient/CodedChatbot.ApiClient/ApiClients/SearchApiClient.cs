@@ -70,5 +70,19 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                     new object[] {request.ArtistName, request.SongName});
             }
         }
+
+        public async Task<bool> DownloadToOneDrive(DownloadToOneDriveRequest request)
+        {
+            try
+            {
+                var result = await _searchClient.PutAsync("DownloadToOneDrive", HttpClientHelper.GetJsonData(request));
+
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] { request.SongId });
+            }
+        }
     }
 }

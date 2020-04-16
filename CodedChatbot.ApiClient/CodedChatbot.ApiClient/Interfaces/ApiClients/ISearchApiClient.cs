@@ -9,5 +9,6 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
         Task<bool> SaveSearchSynonymRequest(SaveSearchSynonymRequest request);
         Task<SongSearchResponse> SongSearch(SongSearchRequest request);
         Task<SongSearchResponse> FormattedSongSearch(FormattedSongSearchRequest request);
+        Task<bool> DownloadToOneDrive(DownloadToOneDriveRequest request);
     }
 }
