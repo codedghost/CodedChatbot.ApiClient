@@ -48,7 +48,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
         {
             try
             {
-                var result = await _streamStatusClient.PutAsync("PuStreamStatus",
+                var result = await _streamStatusClient.PutAsync("PutStreamStatus",
                     HttpClientHelper.GetJsonData(putStreamStatusRequest));
 
                 return result.IsSuccessStatusCode;
