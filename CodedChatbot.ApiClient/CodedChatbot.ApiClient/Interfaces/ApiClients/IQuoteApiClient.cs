@@ -10,5 +10,6 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
         Task<bool> EditQuote(EditQuoteRequest request);
         Task<bool> RemoveQuote(RemoveQuoteRequest request);
         Task<GetQuoteResponse> GetQuote(GetQuoteRequest request);
+        Task<GetQuotesResponse> GetQuotes();
     }
 }

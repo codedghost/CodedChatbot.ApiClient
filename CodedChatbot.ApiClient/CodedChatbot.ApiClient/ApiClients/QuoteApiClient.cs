@@ -89,5 +89,19 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 return HttpClientHelper.LogError<GetQuoteResponse>(_logger, e, new object[] {request.QuoteId});
             }
         }
+
+        public async Task<GetQuotesResponse> GetQuotes()
+        {
+            try
+            {
+                var result = await _quoteClient.GetAsync("GetQuotes");
+
+                return JsonConvert.DeserializeObject<GetQuotesResponse>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<GetQuotesResponse>(_logger, e, new object[] {});
+            }
+        }
     }
 }
