@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection.Metadata;
@@ -149,7 +150,12 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             }
             catch (Exception e)
             {
-                return HttpClientHelper.LogError<bool>(_logger, e, new object[] {string.Join(", ", request.Username)});
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[]
+                {
+                    string.Join(", ",
+                        request.UserSubDetails.Select(d =>
+                            $"{d.Username}, Months: {d.TotalSubMonths}, Streak: {d.SubStreak}, Tier: {d.SubscriptionTier}"))
+                });
             }
         }
 
