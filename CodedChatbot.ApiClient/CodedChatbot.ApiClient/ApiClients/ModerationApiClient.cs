@@ -40,20 +40,5 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 return HttpClientHelper.LogError<bool>(_logger, e, new object[] { request.RequestingModerator, request.OldUsername, request.NewUsername });
             }
         }
-
-        public async Task<bool> IsUserMod(string username)
-        {
-            try
-            {
-                var result = await _moderationClient.GetAsync($"IsMod?{username}");
-
-                return result.IsSuccessStatusCode &&
-                       JsonConvert.DeserializeObject<bool>(await result.Content.ReadAsStringAsync());
-            }
-            catch (Exception e)
-            {
-                return HttpClientHelper.LogError<bool>(_logger, e, new object[] {username});
-            }
-        }
     }
 }
