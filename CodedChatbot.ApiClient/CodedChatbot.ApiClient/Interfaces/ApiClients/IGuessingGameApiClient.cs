@@ -8,5 +8,6 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
         Task<bool> StartGuessingGame(StartGuessingGameRequest songInfo);
         Task<bool> FinishGuessingGame(decimal finalPercentage);
         Task<bool> SubmitGuess(SubmitGuessRequest submitGuessModel);
+        Task<bool> InitialiseGuessingGame();
     }
 }

@@ -70,5 +70,19 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 return HttpClientHelper.LogError<bool>(_logger, e, new object[] {submitGuessModel.Guess, submitGuessModel.Username});
             }
         }
+
+        public async Task<bool> InitialiseGuessingGame()
+        {
+            try
+            {
+                var result = await _guessingGameClient.GetAsync("InitialiseGuessingGame");
+
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] { });
+            }
+        }
     }
 }
