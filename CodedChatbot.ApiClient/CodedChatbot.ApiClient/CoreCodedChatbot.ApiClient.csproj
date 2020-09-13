@@ -11,8 +11,8 @@
 
   <ItemGroup>
     <PackageReference Include="CodedGhost.Config" Version="1.0.549" />
-    <PackageReference Include="CoreCodedChatbot.ApiContract" Version="1.0.704" />
-    <PackageReference Include="CoreCodedChatbot.Secrets" Version="1.0.568" />
+    <PackageReference Include="CoreCodedChatbot.ApiContract" Version="1.0.752" />
+    <PackageReference Include="CoreCodedChatbot.Secrets" Version="1.0.733" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
