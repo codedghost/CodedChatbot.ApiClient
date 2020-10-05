@@ -24,6 +24,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             _logger = logger;
             _clientTriggerClient = HttpClientHelper.BuildClient(configService, secretService, "ClientTrigger");
         }
+
         public async Task<bool> CheckBackgroundSong(CheckBackgroundSongRequest request)
         {
             try
@@ -36,6 +37,21 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             catch (Exception e)
             {
                 return HttpClientHelper.LogError<bool>(_logger, e, new object[] { request.Username });
+            }
+        }
+
+        public async Task<bool> SendBackgroundSongResult(SendBackgroundSongResultRequest request)
+        {
+            try
+            {
+                var result =
+                    await _clientTriggerClient.PostAsync("SendBackgroundSongResult", HttpClientHelper.GetJsonData(request));
+
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return HttpClientHelper.LogError<bool>(_logger, e, new object[] { request.Username, request.Title, request.Artist, request.Url });
             }
         }
     }
