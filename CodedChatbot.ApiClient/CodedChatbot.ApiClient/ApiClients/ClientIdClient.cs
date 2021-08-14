@@ -25,7 +25,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             _clientIdClient = HttpClientHelper.BuildClient(configService, secretService, "ClientId");
         }
 
-        public async void Set(SetClientIdRequestModel request)
+        public async Task Set(SetClientIdRequestModel request)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
             }
         }
 
-        public async void Remove(RemoveClientIdRequestModel request)
+        public async Task Remove(RemoveClientIdRequestModel request)
         {
             try
             {

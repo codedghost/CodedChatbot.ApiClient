@@ -5,7 +5,7 @@ namespace CoreCodedChatbot.ApiClient.Interfaces.ApiClients
 {
     public interface IClientIdClient
     {
-        void Set(SetClientIdRequestModel request);
-        void Remove(RemoveClientIdRequestModel request);
+        Task Set(SetClientIdRequestModel request);
+        Task Remove(RemoveClientIdRequestModel request);
     }
 }
