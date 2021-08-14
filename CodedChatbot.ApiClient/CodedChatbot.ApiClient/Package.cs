@@ -9,6 +9,7 @@ namespace CoreCodedChatbot.ApiClient
         public static IServiceCollection AddApiClientServices(this IServiceCollection services)
         {
             services.AddSingleton<ICustomChatCommandsClient, CustomChatCommandsClient>();
+            services.AddSingleton<IClientIdClient, ClientIdClient>();
             services.AddSingleton<IClientTriggerClient, ClientTriggerClient>();
             services.AddSingleton<IChannelRewardsClient, ChannelRewardsClient>();
             services.AddSingleton<IDevOpsApiClient, DevOpsApiClient>();
