@@ -7,6 +7,7 @@ using CoreCodedChatbot.ApiContract.RequestModels.ChannelRewards;
 using CoreCodedChatbot.Config;
 using CoreCodedChatbot.Secrets;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace CoreCodedChatbot.ApiClient.ApiClients
 {
@@ -47,7 +48,7 @@ namespace CoreCodedChatbot.ApiClient.ApiClients
                 var result =
                     await _channelRewardsClient.PostAsync("StoreRedemption", HttpClientHelper.GetJsonData(request));
 
-                return result.IsSuccessStatusCode;
+                return result.IsSuccessStatusCode && JsonConvert.DeserializeObject<bool>(await result.Content.ReadAsStringAsync());
             }
             catch (Exception e)
             {
