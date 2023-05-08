@@ -3,6 +3,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
+using CoreCodedChatbot.ApiContract.ResponseModels.Quotes;
 using CoreCodedChatbot.Config;
 using CoreCodedChatbot.Secrets;
 using Microsoft.Extensions.Logging;
@@ -48,5 +50,109 @@ namespace CoreCodedChatbot.ApiClient.DataHelper
                 TypeNameHandling = TypeNameHandling.Auto
             };
         }
+
+        public static async Task<TResult> GetAsync<TResult, TLoggerType>(this HttpClient client, string requestUri, ILogger<TLoggerType> logger)
+        {
+            try
+            {
+                var result = await client.GetAsync(requestUri);
+                var resultString = await result.Content.ReadAsStringAsync();
+
+                if (string.IsNullOrWhiteSpace(resultString) && result.IsSuccessStatusCode)
+                {
+                    if (typeof(TResult) == typeof(bool))
+                    {
+                        return JsonConvert.DeserializeObject<TResult>("true");
+                    }
+                }
+
+                return JsonConvert.DeserializeObject<TResult>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return LogError<TResult>(logger, e, new object[] {requestUri});
+            }
+        }
+
+        public static async Task<TResult> PostAsync<TRequest, TResult, TLoggerType>(this HttpClient client, string requestUri,
+            TRequest request, ILogger<TLoggerType> logger)
+        {
+            try
+            {
+                var result = await client.PostAsync(requestUri, GetJsonData(request));
+                var resultString = await result.Content.ReadAsStringAsync();
+
+                if (string.IsNullOrWhiteSpace(resultString) && result.IsSuccessStatusCode)
+                {
+                    if (typeof(TResult) == typeof(bool))
+                    {
+                        return JsonConvert.DeserializeObject<TResult>("true");
+                    }
+                }
+
+                return JsonConvert.DeserializeObject<TResult>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                var requestType = request.GetType();
+                var properties = requestType.GetProperties();
+                var objectArray = properties.Select(p => p.GetValue(request)).ToArray();
+
+                return LogError<TResult>(logger, e, objectArray);
+            }
+        }
+
+        public static async Task<TResult> PutAsync<TRequest, TResult, TLoggerType>(this HttpClient client, string requestUri,
+            TRequest request, ILogger<TLoggerType> logger)
+        {
+            try
+            {
+                var result = await client.PutAsync(requestUri, GetJsonData(request));
+                var resultString = await result.Content.ReadAsStringAsync();
+
+
+                if (string.IsNullOrWhiteSpace(resultString) && result.IsSuccessStatusCode)
+                {
+                    if (typeof(TResult) == typeof(bool))
+                    {
+                        return JsonConvert.DeserializeObject<TResult>("true");
+                    }
+                }
+
+                return JsonConvert.DeserializeObject<TResult>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                var requestType = request.GetType();
+                var properties = requestType.GetProperties();
+                var objectArray = properties.Select(p => p.GetValue(request)).ToArray();
+
+                return LogError<TResult>(logger, e, objectArray);
+            }
+        }
+
+        public static async Task<TResult> DeleteAsync<TResult, TLoggerType>(this HttpClient client, string requestUri, ILogger<TLoggerType> logger)
+        {
+            try
+            {
+                var result = await client.DeleteAsync(requestUri);
+                var resultString = await result.Content.ReadAsStringAsync();
+
+                if (string.IsNullOrWhiteSpace(resultString) && result.IsSuccessStatusCode)
+                {
+                    if (typeof(TResult) == typeof(bool))
+                    {
+                        return JsonConvert.DeserializeObject<TResult>("true");
+                    }
+                }
+
+                return JsonConvert.DeserializeObject<TResult>(await result.Content.ReadAsStringAsync());
+            }
+            catch (Exception e)
+            {
+                return LogError<TResult>(logger, e, new object[] { requestUri });
+            }
+        }
+
     }
 }
