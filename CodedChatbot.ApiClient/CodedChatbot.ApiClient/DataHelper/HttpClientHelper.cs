@@ -51,7 +51,7 @@ namespace CoreCodedChatbot.ApiClient.DataHelper
             };
         }
 
-        public static async Task<TResult> GetAsync<TResult, TLoggerType>(this HttpClient client, string requestUri, ILogger<TLoggerType> logger)
+        public static async Task<TResult> GetAsync<TResult>(this HttpClient client, string requestUri, ILogger logger)
         {
             try
             {
@@ -74,8 +74,8 @@ namespace CoreCodedChatbot.ApiClient.DataHelper
             }
         }
 
-        public static async Task<TResult> PostAsync<TRequest, TResult, TLoggerType>(this HttpClient client, string requestUri,
-            TRequest request, ILogger<TLoggerType> logger)
+        public static async Task<TResult> PostAsync<TRequest, TResult>(this HttpClient client, string requestUri,
+            TRequest request, ILogger logger)
         {
             try
             {
@@ -102,8 +102,8 @@ namespace CoreCodedChatbot.ApiClient.DataHelper
             }
         }
 
-        public static async Task<TResult> PutAsync<TRequest, TResult, TLoggerType>(this HttpClient client, string requestUri,
-            TRequest request, ILogger<TLoggerType> logger)
+        public static async Task<TResult> PutAsync<TRequest, TResult>(this HttpClient client, string requestUri,
+            TRequest request, ILogger logger)
         {
             try
             {
@@ -131,7 +131,7 @@ namespace CoreCodedChatbot.ApiClient.DataHelper
             }
         }
 
-        public static async Task<TResult> DeleteAsync<TResult, TLoggerType>(this HttpClient client, string requestUri, ILogger<TLoggerType> logger)
+        public static async Task<TResult> DeleteAsync<TResult>(this HttpClient client, string requestUri, ILogger logger)
         {
             try
             {
